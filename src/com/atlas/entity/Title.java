@@ -2,7 +2,10 @@ package com.atlas.entity;
 
 import java.util.Date;
 
-public class Movie {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Title {
 	private int id;
 	private String title;
 	private String rated;
