@@ -6,10 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Title {
+	
 	private int id;
+	private int year;
 	private String title;
 	private String rated;
 	private Date released;
+	private int runtime;
 	private String genre;
 	private String director;
 	private String actor;
@@ -23,7 +26,7 @@ public class Title {
 	private double imdbRating;
 	private long imdbVotes;
 	private String imdbId;
-	private String type;
+	private String titleType;
 
 	public int getId() {
 		return id;
@@ -31,6 +34,30 @@ public class Title {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getRuntime() {
+		return runtime;
+	}
+
+	public String getTitleType() {
+		return titleType;
+	}
+
+	public void setTitleType(String titleType) {
+		this.titleType = titleType;
+	}
+
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
 	}
 
 	public String getTitle() {
@@ -161,11 +188,4 @@ public class Title {
 		this.imdbId = imdbId;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 }
