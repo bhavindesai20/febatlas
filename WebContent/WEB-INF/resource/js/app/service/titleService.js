@@ -1,0 +1,1 @@
+App.factory('TitleService', ['$http', '$q', function($http, $q){}]);
