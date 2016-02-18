@@ -2,40 +2,86 @@ package com.atlas.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+
 @Component
+@Entity
+@Table(name="Title")
 public class Title {
 	
+	@Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
 	private int id;
-	private int year;
+	
+	@Column(name="title")
 	private String title;
+	
+	@Column(name="year")
+	private int year;
+	
+	@Column(name="rated")
 	private String rated;
+	
+	@Column(name="released")
 	private Date released;
+	
+	@Column(name="runtime")
 	private int runtime;
+	
+	@Column(name="genre")
 	private String genre;
+	
+	@Column(name="director")
 	private String director;
+	
+	@Column(name="actor")
 	private String actor;
+	
+	@Column(name="writer")
 	private String writer;
+	
+	@Column(name="plot")
 	private String plot;
+	
+	@Column(name="language")
 	private String language;
+	
+	@Column(name="country")
 	private String country;
+	
+	@Column(name="award")
 	private String award;
+	
+	@Column(name="poster")
 	private String poster;
+	
+	@Column(name="metascore")
 	private int metaScore;
+	
+	@Column(name="imdbrating")
 	private double imdbRating;
+	
+	@Column(name="imdbvotes")
 	private long imdbVotes;
+	
+	@Column(name="imdbid")
 	private String imdbId;
+	
+	@Column(name="titletype")
 	private String titleType;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	 
+	
 	public int getYear() {
 		return year;
 	}
@@ -44,20 +90,20 @@ public class Title {
 		this.year = year;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public int getRuntime() {
 		return runtime;
 	}
 
-	public String getTitleType() {
-		return titleType;
-	}
-
-	public void setTitleType(String titleType) {
-		this.titleType = titleType;
-	}
-
 	public void setRuntime(int runtime) {
 		this.runtime = runtime;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
@@ -75,7 +121,8 @@ public class Title {
 	public void setRated(String rated) {
 		this.rated = rated;
 	}
-
+	
+	@JsonSerialize(using=DateSerializer.class)
 	public Date getReleased() {
 		return released;
 	}
@@ -186,6 +233,14 @@ public class Title {
 
 	public void setImdbId(String imdbId) {
 		this.imdbId = imdbId;
+	}
+
+	public String getTitleType() {
+		return titleType;
+	}
+
+	public void setTitleType(String titleType) {
+		this.titleType = titleType;
 	}
 
 }

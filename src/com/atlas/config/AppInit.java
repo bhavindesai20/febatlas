@@ -21,7 +21,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	@Override
 	protected String[] getServletMappings() {
 		// TODO Auto-generated method stub
-		return new String[] {"/"};
+		return new String[] {"/api/*"};
 	}
 	
 	@Override
