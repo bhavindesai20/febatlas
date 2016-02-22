@@ -11,12 +11,14 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Component
 @Entity
 @Table(name="Title")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Title {
 	
 	@Id
@@ -81,6 +83,9 @@ public class Title {
 	@Column(name="type")
 	private String type;
 	 
+	public Title(){
+		
+	}
 	
 	public int getYear() {
 		return year;
