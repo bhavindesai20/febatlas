@@ -17,38 +17,51 @@ public class TitleServiceImpl implements TitleService{
 	public TitleServiceImpl(){}
 	
 	@Override
-	public void addTitle(Title t) {
-		titleDAO.addTitle(t);
+	public Title addTitle(Title t) {
+		return titleDAO.addTitle(t);
+	}
+
+	@Override
+	public Title updateTitle(Title t) {
+		return titleDAO.updateTitle(t);
 		
 	}
-	
+
+	@Override
+	public Title removeTitle(int id) {
+		return titleDAO.removeTitle(id);
+		
+	}
+
 	@Override
 	public List<Title> listTitles() {
 		return titleDAO.listTitles();
 	}
-	
-	@Override
-	public void updateTitle(Title t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeTitle(int id) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Title getTitleById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return titleDAO.getTitleById(id);
 	}
 
 	@Override
 	public List<Title> getTitleBySearchTerm(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		return titleDAO.getTitleBySearchTerm(title);
 	}
+
+	@Override
+	public List<Title> getTitleByYear(int year) {
+		return titleDAO.getTitleByYear(year);
+	}
+
+	@Override
+	public List<Title> getTitleByType(String type) {
+		return titleDAO.getTitleByType(type);
+	}
+
+	@Override
+	public List<Title> getTitleByGenre(String genre) {
+		return titleDAO.getTitleByGenre(genre);
+	}
+
 
 }
