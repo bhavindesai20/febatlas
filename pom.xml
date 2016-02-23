@@ -8,32 +8,6 @@
 
 	<dependencies>
 
-		<!-- Swagger UI with SpringFox -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.5</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>4.2.4.RELEASE</version>
-		</dependency>
-
-		<!-- End of Swagger -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
