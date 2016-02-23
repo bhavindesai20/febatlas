@@ -1,12 +1,14 @@
 package com.atlas.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -82,7 +84,29 @@ public class Title {
 	
 	@Column(name="type")
 	private String type;
+	
+	@OneToMany(mappedBy = "title")
+	private List<Comments> comments;
+	
+	@OneToMany(mappedBy = "title")
+	private List<Rating> rating;
 	 
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public List<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(List<Rating> rating) {
+		this.rating = rating;
+	}
+
 	public Title(){
 		
 	}
