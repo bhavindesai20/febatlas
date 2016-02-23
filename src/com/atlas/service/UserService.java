@@ -10,9 +10,9 @@ import com.atlas.entity.User;
 public interface UserService {
 	public void addUser(User u);
 
-	public void updateUser(User u);
+	public User updateUser(User u);
 
-	public void removeUser(int id);
+	public User removeUser(int id);
 
 	public List<User> listUser();
 
