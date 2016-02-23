@@ -77,22 +77,17 @@ public class TitleDAOImpl implements TitleDAO{
 	@Override
 	@Transactional
 	public List<Title> getTitleBySearchTerm(String title) {
-		List<Title> titleListByTitle = new ArrayList<Title>();
-		Iterator<Title> allTitles = listTitles().iterator();
-		while (allTitles.hasNext()) {
-			Title getTitle = allTitles.next();
-			boolean valid = getTitle.getTitle().contains(title);
-			if (valid == true) {
-				titleListByTitle.add(getTitle);
-			}
-		}
+		
+		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.title) like :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Title> titleListByTitle = query.setParameter("searchTerm","%"+ title + "%").list();
 		return titleListByTitle;
 	}
 	
 	@Override
 	@Transactional
 	public List<Title> getTitleByYear(int year) {
-		String hql ="from title where year="+year;
+		String hql ="from Title where year="+year;
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
@@ -101,28 +96,21 @@ public class TitleDAOImpl implements TitleDAO{
 	}
 
 	@Override
+	@Transactional
 	public List<Title> getTitleByType(String type) {
-		String hql ="from title where type="+type;
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(hql);
+		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.type) = :searchTerm");
 		@SuppressWarnings("unchecked")
-	    List<Title> listTitle = (List<Title>) query.list();
-		return listTitle;
+		List<Title> titleListByType = query.setParameter("searchTerm",type).list();
+		return titleListByType;
 	}
 
 
 	@Override
+	@Transactional
 	public List<Title> getTitleByGenre(String genre) {
-		List<Title> titleListByGenre = new ArrayList<Title>();
-		Iterator<Title> allTitles = listTitles().iterator();
-		while (allTitles.hasNext()) {
-			Title getTitle = allTitles.next();
-			boolean valid = getTitle.getGenre().contains(genre);
-			if (valid == true) {
-				titleListByGenre.add(getTitle);
-			}
-		}
+		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.genre) like :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Title> titleListByGenre = query.setParameter("searchTerm","%"+ genre + "%").list();
 		return titleListByGenre;
 	}
-
 }

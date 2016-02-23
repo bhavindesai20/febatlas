@@ -49,24 +49,24 @@ public class TitleController {
 		return this.titleService.removeTitle(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Title> getTitleByTitle(@RequestParam(required=true, value="q") String search) {
-		return this.titleService.getTitleBySearchTerm(search);
+	@RequestMapping(value="/titlefilter",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Title> getTitleByTitle(@RequestParam(required=true,value="title") String title) {
+		return this.titleService.getTitleBySearchTerm(title);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Title> getTitleByYear(@RequestParam(required=true, value="year") int year) {
+	@RequestMapping(value="/yearfilter",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Title> getTitleByYear(@RequestParam(required=true,value="year") Integer year) {
 		return this.titleService.getTitleByYear(year);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Title> getTitleByType(@RequestParam(required=true, value="type") String type) {
-		return this.titleService.getTitleByType(type);
+	@RequestMapping(value="/genrefilter",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Title> getTitleByGenre(@RequestParam(required=true,value="genre") String genre) {
+		return this.titleService.getTitleByGenre(genre);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Title> getTitleByGenre(@RequestParam(required=true, value="genre") String genre) {
-		return this.titleService.getTitleByGenre(genre);
+	@RequestMapping(value="/typefilter",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Title> getTitleByType(@RequestParam(required=true,value="type") String type) {
+		return this.titleService.getTitleByType(type);
 	}
 
 }
