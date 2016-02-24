@@ -21,13 +21,13 @@ public class User {
 	@Column(name = "firstName", nullable = false)
 	private String firstName;
 
-	@Column(name = "firstName")
-	private String LastName;
+	@Column(name = "lastName")
+	private String lastName;
 
-	@Column(name = "firstName", unique = true, nullable = false)
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 
-	@Column(name = "firstName", nullable = false)
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	public int getId() {
@@ -46,12 +46,12 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public String getLastName() {
-		return LastName;
+	public String getlastName() {
+		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setlastName(String lastName) {
+		lastName = lastName;
 	}
 
 	public String getEmail() {
