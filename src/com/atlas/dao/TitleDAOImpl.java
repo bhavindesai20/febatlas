@@ -14,15 +14,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlas.entity.Title;
 
 @Repository
-public class TitleDAOImpl implements TitleDAO{
-	
+public class TitleDAOImpl implements TitleDAO {
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public TitleDAOImpl() {
 	}
-	
-	
+
 	@Override
 	@Transactional
 	public Title addTitle(Title t) {
@@ -43,14 +42,9 @@ public class TitleDAOImpl implements TitleDAO{
 	@Transactional
 	public Title removeTitle(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Title title = (Title)session.load(Title.class, new Integer(id));
-		if (null != title) {
-			session.delete(title);
-			return title;
-		}
-		else{
-			return null; //throw exception
-		}
+		Title title = (Title) session.load(Title.class, new Integer(id));
+		session.delete(title);
+		return title;
 	}
 
 	@Override
@@ -66,51 +60,52 @@ public class TitleDAOImpl implements TitleDAO{
 	@Transactional
 	public Title getTitleById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Title title = (Title)session.load(Title.class, new Integer(id));
-		System.out.println(title);
-		if (null != title) {
-			return title;
-		}
-		return null;
+		Title title = (Title) session.load(Title.class, new Integer(id));
+		return title;
 	}
 
 	@Override
 	@Transactional
 	public List<Title> getTitleBySearchTerm(String title) {
-		
-		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.title) like :searchTerm");
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.title) like :searchTerm");
 		@SuppressWarnings("unchecked")
-		List<Title> titleListByTitle = query.setParameter("searchTerm","%"+ title + "%").list();
+		List<Title> titleListByTitle = query.setParameter("searchTerm",
+				"%" + title + "%").list();
 		return titleListByTitle;
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Title> getTitleByYear(int year) {
-		String hql ="from Title where year="+year;
+		String hql = "from Title where year=" + year;
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(hql);
 		@SuppressWarnings("unchecked")
-	    List<Title> listTitle = (List<Title>) query.list();
+		List<Title> listTitle = (List<Title>) query.list();
 		return listTitle;
 	}
 
 	@Override
 	@Transactional
 	public List<Title> getTitleByType(String type) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.type) = :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.type) = :searchTerm");
 		@SuppressWarnings("unchecked")
-		List<Title> titleListByType = query.setParameter("searchTerm",type).list();
+		List<Title> titleListByType = query.setParameter("searchTerm", type)
+				.list();
 		return titleListByType;
 	}
-
 
 	@Override
 	@Transactional
 	public List<Title> getTitleByGenre(String genre) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Title t where str(t.genre) like :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.genre) like :searchTerm");
 		@SuppressWarnings("unchecked")
-		List<Title> titleListByGenre = query.setParameter("searchTerm","%"+ genre + "%").list();
+		List<Title> titleListByGenre = query.setParameter("searchTerm",
+				"%" + genre + "%").list();
 		return titleListByGenre;
 	}
 }

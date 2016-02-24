@@ -11,12 +11,16 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Component
 @Entity
 @Table(name = "Comments")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Comments {
 
 	@Id
@@ -26,11 +30,13 @@ public class Comments {
 
 	@Column(name = "comments")
 	private String comments;
-
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "title_Id", nullable = false)
 	private Title title;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_Id", nullable = false)
 	private User user;

@@ -3,6 +3,7 @@ package com.atlas.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atlas.entity.Title;
+import com.atlas.exception.MovieBadRequest;
+import com.atlas.exception.MovieNotFound;
 import com.atlas.service.TitleService;
 
 
@@ -20,6 +23,7 @@ import com.atlas.service.TitleService;
 public class TitleController {
 
 	@Autowired
+	@Qualifier("titleServiceImpl")
 	private TitleService titleService;
 
 	@RequestMapping(method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
@@ -28,24 +32,24 @@ public class TitleController {
 	}
 	
 	@RequestMapping(value="{id}",method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Title getTitleById(@PathVariable("id") int id) {
+	public Title getTitleById(@PathVariable("id") int id) throws MovieNotFound{
 		return this.titleService.getTitleById(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Title addTitle(@RequestBody Title t) {
+	public Title addTitle(@RequestBody Title t) throws MovieBadRequest{
 		return this.titleService.addTitle(t);	
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE,
 			consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Title updateTitle(@RequestBody Title t) {
+	public Title updateTitle(@RequestBody Title t) throws MovieNotFound{
 		return this.titleService.updateTitle(t);
 	}
 	
 	@RequestMapping(value="{id}",method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_VALUE)
-	public Title deleteTitleById(@PathVariable("id") int id) {
+	public Title deleteTitleById(@PathVariable("id") int id) throws MovieNotFound{
 		return this.titleService.removeTitle(id);
 	}
 	
