@@ -39,7 +39,7 @@ public class RatingDAOImpl implements RatingDAO {
 
 	@Override
 	@Transactional
-	public List<Rating> getRatingByMovie(int titleId) {
+	public List<Rating> getRatingByTitle(int titleId) {
 		Query query = sessionFactory.getCurrentSession().createQuery("from Rating r where r.title_Id = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<Rating> ratingListByTitle = query.setParameter("searchTerm",titleId).list();
