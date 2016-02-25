@@ -13,7 +13,7 @@ public interface RatingDAO {
 
 	public List<Rating> getRatingByUser(int userId);
 
-	public List<Rating> getRatingByMovie(int titleId);
+	public List<Rating> getRatingByTitle(int titleId);
 
 	public Double getAverageRatingForTitle(int titleId);
 }
