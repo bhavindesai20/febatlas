@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -101,7 +102,8 @@ public class Title {
 	public void setComments(List<Comments> comments) {
 		this.comments = comments;
 	}
-
+	
+	@JsonIgnore
 	public List<Rating> getRating() {
 		return rating;
 	}
