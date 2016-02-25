@@ -33,6 +33,14 @@ public class User {
 	@Column(name = "lastName")
 	private String lastName;
 
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 
@@ -45,13 +53,6 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Rating> rating;
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public List<Comments> getComments() {
 		return comments;
@@ -83,14 +84,6 @@ public class User {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-
-	public String getlastName() {
-		return lastName;
-	}
-
-	public void setlastName(String lastName) {
-		lastName = lastName;
 	}
 
 	public String getEmail() {
