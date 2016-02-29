@@ -12,19 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlas.entity.Comments;
 
 @Repository
-public class CommentsDAOImpl implements CommentsDAO{
-	
+public class CommentsDAOImpl implements CommentsDAO {
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public CommentsDAOImpl() {
 	}
-	
+
 	@Override
 	@Transactional
-	public Comments addComments(Comments c) {
+	public Comments addComments(int titleId, int userId, Comments c) {
 		Session session = sessionFactory.getCurrentSession();
-		session.persist(c);
+		session.save(c);
 		return c;
 	}
 
@@ -32,8 +32,18 @@ public class CommentsDAOImpl implements CommentsDAO{
 	@Transactional
 	public Comments removeComments(int commentId) {
 		Session session = sessionFactory.getCurrentSession();
-		Comments comment = (Comments)session.load(Comments.class, new Integer(commentId));
+		Comments comment = (Comments) session.get(Comments.class, new Integer(commentId));
+		comment.setTitle(null);
+		comment.setUser(null);
 		session.delete(comment);
+		return comment;
+	}
+
+	@Override
+	@Transactional
+	public Comments getCommentByID(int commentId) {
+		Session session = sessionFactory.getCurrentSession();
+		Comments comment = (Comments) session.get(Comments.class, new Integer(commentId));
 		return comment;
 	}
 
@@ -48,7 +58,7 @@ public class CommentsDAOImpl implements CommentsDAO{
 	@Override
 	@Transactional
 	public List<Comments> getCommentsForTitle(int titleId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Comments c where c.title_Id = :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery("from Comments where title_Id = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<Comments> commentsListByTitle = query.setParameter("searchTerm",titleId).list();
 		return commentsListByTitle;
@@ -57,10 +67,38 @@ public class CommentsDAOImpl implements CommentsDAO{
 	@Override
 	@Transactional
 	public List<Comments> getCommentsForUser(int userId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Comments c where c.user_Id = :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery("from Comments where user_Id = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<Comments> commentsListByUser = query.setParameter("searchTerm",userId).list();
 		return commentsListByUser;
+	}
+
+	@Override
+	@Transactional
+	public void removeCommentsForUser(int userId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = sessionFactory.getCurrentSession().createQuery("from Comments where user_Id = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Comments> commentsListByUser = query.setParameter("searchTerm",userId).list();
+		for (Comments cm : commentsListByUser) {
+			cm.setTitle(null);
+			cm.setUser(null);
+			session.delete(cm);
+		}
+	}
+
+	@Override
+	@Transactional
+	public void removeCommentsForTitle(int titleId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = sessionFactory.getCurrentSession().createQuery("from Comments where title_Id = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Comments> commentsListByTitle = query.setParameter("searchTerm",titleId).list();
+		for (Comments cm : commentsListByTitle) {
+			cm.setTitle(null);
+			cm.setUser(null);
+			session.delete(cm);
+		}
 	}
 
 }

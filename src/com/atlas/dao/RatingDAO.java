@@ -16,4 +16,8 @@ public interface RatingDAO {
 	public List<Rating> getRatingByTitle(int titleId);
 
 	public Double getAverageRatingForTitle(int titleId);
+
+	public void removeRatingForUser(int userId);
+
+	public void removeRatingForTitle(int titleId);
 }

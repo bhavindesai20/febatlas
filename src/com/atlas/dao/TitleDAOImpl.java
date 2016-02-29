@@ -40,7 +40,7 @@ public class TitleDAOImpl implements TitleDAO {
 	@Transactional
 	public Title removeTitle(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Title title = (Title) session.load(Title.class, new Integer(id));
+		Title title = (Title) session.get(Title.class, new Integer(id));
 		session.delete(title);
 		return title;
 	}
@@ -58,7 +58,7 @@ public class TitleDAOImpl implements TitleDAO {
 	@Transactional
 	public Title getTitleById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Title title = (Title) session.load(Title.class, new Integer(id));
+		Title title = (Title) session.get(Title.class, new Integer(id));
 		return title;
 	}
 

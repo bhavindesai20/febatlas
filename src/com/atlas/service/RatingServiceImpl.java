@@ -18,7 +18,8 @@ import com.atlas.exception.UserUnAuthorized;
 
 @Service
 public class RatingServiceImpl implements RatingService {
-
+	
+	@Autowired
 	@Qualifier("titleDAOImpl")
 	private TitleDAO titleDAO;
 
