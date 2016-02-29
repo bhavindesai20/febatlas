@@ -38,7 +38,7 @@ public class CommentsServiceImpl implements CommentsService {
 	@Override
 	public Comments addComments(int titleId, int userId, Comments c)
 			throws UserNotFound, MovieNotFound, CommentBadRequest {
-		if (c.getComments() == null) {
+		if (c.getComments().isEmpty()) {
 			throw new CommentBadRequest();
 		}
 		Title t = titleDAO.getTitleById(titleId);
@@ -53,7 +53,7 @@ public class CommentsServiceImpl implements CommentsService {
 		} else {
 			throw new UserNotFound();
 		}
-		return commentsDAO.addComments(c);
+		return commentsDAO.addComments(titleId,userId,c);
 	}
 
 	@Override
@@ -75,10 +75,12 @@ public class CommentsServiceImpl implements CommentsService {
 		if (t == null) {
 			throw new MovieNotFound();
 		}
+		c.setTitle(t);
 		User u = userDAO.getUserById(userId);
 		if (u == null) {
 			throw new UserUnAuthorized();
 		}
+		c.setUser(u);
 		return commentsDAO.updateComment(c);
 	}
 

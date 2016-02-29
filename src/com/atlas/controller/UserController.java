@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atlas.entity.User;
+import com.atlas.exception.UserBadRequest;
+import com.atlas.exception.UserNotFound;
 import com.atlas.service.UserService;
 
 @RestController
@@ -22,20 +24,20 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addUser(@RequestBody User u) {
-		this.userService.addUser(u);
+	public User addUser(@RequestBody User u) throws UserBadRequest {
+		return this.userService.addUser(u);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, 
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
-	public User updateUser(@RequestBody User u) {
+	public User updateUser(@RequestBody User u) throws UserNotFound {
 		return this.userService.updateUser(u);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public User removeUser(@PathVariable("id") int id) {
+	public User removeUser(@PathVariable("id") int id) throws UserNotFound {
 		return this.userService.removeUser(id);
 	}
 
@@ -47,7 +49,7 @@ public class UserController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public User getUserById(@PathVariable("id") int id) {
+	public User getUserById(@PathVariable("id") int id) throws UserNotFound {
 		return this.userService.getUserById(id);
 	}
 

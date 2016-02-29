@@ -44,7 +44,7 @@ public class RatingController {
 		return this.ratingServiceImpl.getRatingByTitle(titleId);
 	}
 
-	@RequestMapping(value = "/title/{titleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "{titleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Double getAvgRatingForTitle(@PathVariable("titleId") int titleId)
 			throws MovieNotFound {
 		return this.ratingServiceImpl.getAverageRatingForTitle(titleId);

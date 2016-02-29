@@ -31,7 +31,7 @@ public class RatingDAOImpl implements RatingDAO {
 	@Override
 	@Transactional
 	public List<Rating> getRatingByUser(int userId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Rating r where r.user_Id = :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where user_Id = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<Rating> ratingsListByUser = query.setParameter("searchTerm",userId).list();
 		return ratingsListByUser;
@@ -40,7 +40,7 @@ public class RatingDAOImpl implements RatingDAO {
 	@Override
 	@Transactional
 	public List<Rating> getRatingByTitle(int titleId) {
-		Query query = sessionFactory.getCurrentSession().createQuery("from Rating r where r.title_Id = :searchTerm");
+		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where title_Id = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<Rating> ratingListByTitle = query.setParameter("searchTerm",titleId).list();
 		return ratingListByTitle;
@@ -50,13 +50,42 @@ public class RatingDAOImpl implements RatingDAO {
 	@Transactional
 	public Double getAverageRatingForTitle(int titleId) {
 		Double average=0.0;
-		Query query = sessionFactory.getCurrentSession().createQuery("select AVG(rating) from Rating r where r.title_Id = :searchTerm group by r.title_Id");
-		@SuppressWarnings("unchecked")
-		List<Object[]> avgRating = query.setParameter("searchTerm",titleId).list();
-		for (Object[] aRow : avgRating) {
-			average = (Double) aRow[0];
-		}
+		Query query = sessionFactory.getCurrentSession().createQuery("select AVG(rating) from Rating where title_Id = :searchTerm group by title_Id");
+		@SuppressWarnings("rawtypes")
+		List avgRating = query.setParameter("searchTerm",titleId).list();
+		average = (Double) avgRating.get(0);
 		return average;
 	}
+	
+	@Override
+	@Transactional
+	public void removeRatingForUser(int userId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where user_Id = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Rating> ratingsListByTitle = query.setParameter("searchTerm",userId).list();
+		for(Rating r : ratingsListByTitle)
+		{
+			r.setTitle(null);
+			r.setUser(null);
+			session.delete(r);
+		}
+	}
+	
+	@Override
+	@Transactional
+	public void removeRatingForTitle(int titleId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where title_Id = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Rating> ratingsListByTitle = query.setParameter("searchTerm",titleId).list();
+		for(Rating r : ratingsListByTitle)
+		{
+			r.setTitle(null);
+			r.setUser(null);
+			session.delete(r);
+		}
+	}
+
 
 }
