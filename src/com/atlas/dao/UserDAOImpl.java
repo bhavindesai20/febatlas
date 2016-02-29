@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,6 +68,19 @@ public class UserDAOImpl implements UserDAO {
 			return user;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean authenticate(int id, String password) {
+		Session session = sessionFactory.getCurrentSession();
+		User user = (User) session.load(User.class, new Integer(id));
+		if (null != user) {
+			if (BCrypt.checkpw(password, user.getPassword()))
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 }
