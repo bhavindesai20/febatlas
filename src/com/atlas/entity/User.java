@@ -85,13 +85,7 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public String getlastName() {
-		return lastName;
-	}
 
-	public void setlastName(String lastName) {
-		lastName = lastName;
-	}
 
 	public String getEmail() {
 		return email;
