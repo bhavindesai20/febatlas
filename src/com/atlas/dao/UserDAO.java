@@ -19,4 +19,6 @@ public interface UserDAO {
 	
 	public User getUserById(int id);
 	
+	public boolean authenticate(int id, String password); 
+	
 }
