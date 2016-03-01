@@ -20,4 +20,6 @@ public interface UserService {
 
 	public User getUserById(int id) throws UserNotFound;
 	
+	public boolean authenticate(int id, String password);
+	
 }
