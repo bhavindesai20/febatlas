@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.atlas.dao.CommentsDAO;
+import com.atlas.dao.RatingDAO;
 import com.atlas.dao.TitleDAO;
+import com.atlas.entity.Comments;
+import com.atlas.entity.Rating;
 import com.atlas.entity.Title;
 import com.atlas.exception.MovieBadRequest;
 import com.atlas.exception.MovieNotFound;
@@ -17,6 +21,14 @@ public class TitleServiceImpl implements TitleService{
 	@Autowired
 	@Qualifier("titleDAOImpl")
 	private TitleDAO titleDAO;
+	
+	@Autowired
+	@Qualifier("commentsDAOImpl")
+	private CommentsDAO commentsDAO;
+
+	@Autowired
+	@Qualifier("ratingDAOImpl")
+	private RatingDAO ratingDAO;
 	
 	public TitleServiceImpl(){}
 	
@@ -44,6 +56,13 @@ public class TitleServiceImpl implements TitleService{
 		if (existing == null) {
 			throw new MovieNotFound();
 		} else {
+			List<Comments> commentlist= commentsDAO.getCommentsForTitle(id);
+			List<Rating> ratinglist= ratingDAO.getRatingByTitle(id);
+			if(commentlist!=null){
+				commentsDAO.removeCommentsForTitle(id);			}
+			if(ratinglist!=null){
+				ratingDAO.removeRatingForTitle(id);
+			}
 			return titleDAO.removeTitle(id);
 		}
 	}

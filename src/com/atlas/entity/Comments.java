@@ -1,5 +1,6 @@
 package com.atlas.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,10 +33,10 @@ public class Comments {
 	private String comments;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "title_Id", nullable = false)
 	private Title title;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "user_Id", nullable = false)
 	private User user;

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.atlas.entity.User;
 
 @Repository
@@ -20,10 +20,10 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	@Transactional
-	public void addUser(User u) {
+	public User addUser(User u) {
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(u);
-
+		return u;
 	}
 
 	@Override
@@ -32,21 +32,15 @@ public class UserDAOImpl implements UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(u);
 		return u;
-
 	}
 
 	@Override
 	@Transactional
 	public User removeUser(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		User user = (User) session.load(User.class, new Integer(id));
-		if (null != user) {
-			session.delete(user);
-			return user;
-		} else {
-			return null;
-		}
-
+		User user = (User) session.get(User.class, new Integer(id));
+		session.delete(user);
+		return user;
 	}
 
 	@Override
@@ -62,25 +56,8 @@ public class UserDAOImpl implements UserDAO {
 	@Transactional
 	public User getUserById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		User user = (User) session.load(User.class, new Integer(id));
-		System.out.println(user);
-		if (null != user) {
-			return user;
-		}
-		return null;
-	}
-
-	@Override
-	public boolean authenticate(int id, String password) {
-		Session session = sessionFactory.getCurrentSession();
-		User user = (User) session.load(User.class, new Integer(id));
-		if (null != user) {
-			if (BCrypt.checkpw(password, user.getPassword()))
-				return true;
-			else
-				return false;
-		}
-		return false;
+		User user = (User) session.get(User.class, new Integer(id));
+		return user;
 	}
 
 }

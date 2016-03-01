@@ -9,7 +9,7 @@ import com.atlas.entity.User;
 
 @Repository
 public interface UserDAO {
-	public void addUser(User u);
+	public User addUser(User u);
 
 	public User updateUser(User u);
 
