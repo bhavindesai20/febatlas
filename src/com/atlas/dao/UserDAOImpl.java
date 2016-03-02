@@ -64,7 +64,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean authenticate(int id, String password) {
+	public boolean login(int id, String password) {
 		Session session = sessionFactory.getCurrentSession();
 		User user = (User) session.load(User.class, new Integer(id));
 		if (null != user) {

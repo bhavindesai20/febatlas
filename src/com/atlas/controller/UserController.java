@@ -2,6 +2,8 @@ package com.atlas.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,9 +58,9 @@ public class UserController {
 	
 	@RequestMapping(value="/userId/{password}", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public boolean authenticate(@RequestParam(required=true,value="userID") int id,
-			@PathVariable("password") String password){
-		return this.userService.authenticate(id, password);
+	public String login(@RequestParam(required=true,value="userID") int id,
+			@PathVariable("password") String password) throws ServletException, UserNotFound{
+		return this.userService.login(id, password);
 		}
 
 }

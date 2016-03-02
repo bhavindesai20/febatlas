@@ -1,6 +1,9 @@
 package com.atlas.service;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +17,9 @@ import com.atlas.entity.Rating;
 import com.atlas.entity.User;
 import com.atlas.exception.UserBadRequest;
 import com.atlas.exception.UserNotFound;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -86,7 +92,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean authenticate(int id, String password) {
-		return userDAO.authenticate(id, password);
+	public String login(int id, String password) throws ServletException, UserNotFound {
+		 if(userDAO.login(id, password)){
+			 User user=getUserById(id);
+			 return new String(Jwts.builder().setSubject(user.getFirstName())
+			           .claim("roles", user.getLastName()).setIssuedAt(new Date())
+			           .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
+		 }
+		 throw new ServletException("Invalid login");
 	}
 }

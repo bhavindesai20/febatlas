@@ -2,6 +2,8 @@ package com.atlas.service;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.stereotype.Service;
 
 import com.atlas.entity.User;
@@ -20,6 +22,6 @@ public interface UserService {
 
 	public User getUserById(int id) throws UserNotFound;
 	
-	public boolean authenticate(int id, String password);
+	public String login(int id, String password) throws ServletException, UserNotFound;
 	
 }
