@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Flix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../resource/css/style.css" >
+
+</head>
+<body>
+
+<!--Navbar-->
+<nav class="navbar navbar-inverse navbar-fixed-top" id="movie-navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target = "#navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="" class="navbar-brand">MovieFlix</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#feeback">FAQ</a>
+                <li><a href="#feeback">Meet the Team</a>
+                <li><a href="#feeback">ContactUs</a>
+            </ul>
+            <div class="col-sm-3 col-md-3 pull-center">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div><!--serach button-->
+                    </div><!--input group-->
+                </form>
+            </div><!--NAvbar menu-->
+            <div class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Already have an account?</p></li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class ="caret"></span></a>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Login via
+                                <div class="social-buttons">
+                                    <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                                    <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                </div>
+                                or
+                                <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                        <div class="help-block text-right"><a href="register.html">Register</a></div>
+                                        <div class="help-block text-right"><a href="">Forget the password ?</a></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> keep me logged-in
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div><!--nav header-->
+    </div><!--container-->
+</nav>
+<!--Container-->
+<div class="container" >
+    <div class="hero-unit">
+        <h1 class="header-text">
+            <p class="text-center"> MovieFlix<img src="../resource/images/movie_basket.png" height="55" width="55">
+            </p>
+        </h1>
+    </div>
+    </br>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+
+            <div class="item active">
+                <img src="../resource/images/banner.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>Caption Text</h3>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../resource/images/banner1.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>Caption Text</h3>
+                </div>
+            </div>
+            <div class="item">
+                <img src="../resource/images/banner2.jpg" alt="...">
+                <div class="carousel-caption">
+                    <h3>Caption Text</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div> <!-- Carousel -->
+    <div class="cleartext">
+    </div>
+</div>
+
+<!--footer-->
+<div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">© 2016 - FEBATLAS
+        </p>
+
+        <a href="http://youtu.be/zJahlKPCL9g" class="navbar-btn btn-danger btn pull-right">
+            <span class="glyphicon glyphicon-star"></span>  Subscribe to our newsletter</a>
+    </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../resource/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+
+
+html,body
+{
+    position: relative;
+    min-height: 100%;
+    padding-top: 20px;
+    font-family: 'Roboto Condensed', sans-serif;
+    background:#3f444e;
+
+}
+
+
+.hero-unit {
+    background:url('http://cdn.wonderfulengineering.com/wp-content/uploads/2014/10/wood-wallpaper-20.jpg');
+    background-size:cover;
+    height:300px;
+    opacity: .99;
+}
+
+.hero-unit-banner {
+    background:url('http://ibin.co/2Yt8RjeajxNW');
+    background-size: auto;
+    background-repeat: no-repeat;
+    height:90px;
+    opacity: .99;
+}
+
+h1.header-text
+{
+    position: relative;
+    top: 100px;
+    color: blanchedalmond;
+    font-family: 'Rockwell Extra Bold', 'Rockwell Bold', monospace;
+    font-size: 68px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bolder;
+    line-height: 26.4px;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
+
+h3.text-white {
+
+    color: #f5f5f5;
+}
+
+footer.footer-text {
+
+    color: #f5f5f5;
+}
+
+.movie-content {
+    background-color: white;
+}
+
+h1.movie-title
+{
+    color: firebrick;
+    font-family: Arial;
+}
+
+p.movie_option {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+p.movie_option a{
+    color:#555;
+}
