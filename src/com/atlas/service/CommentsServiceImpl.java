@@ -86,6 +86,10 @@ public class CommentsServiceImpl implements CommentsService {
 
 	@Override
 	public List<Comments> getCommentsForTitle(int titleId) throws MovieNotFound {
+		Title t = titleDAO.getTitleById(titleId);
+		if(t == null){
+			throw new MovieNotFound();
+		}
 		return commentsDAO.getCommentsForTitle(titleId);
 	}
 

@@ -34,7 +34,8 @@ public class TitleServiceImpl implements TitleService{
 	
 	@Override
 	public Title addTitle(Title t) throws MovieBadRequest {
-		if (t.getTitle() == null) {
+		Title existing = titleDAO.getTitleById(t.getId());
+		if (t.getTitle() == null || existing != null) {
 			throw new MovieBadRequest();
 		}
 		return titleDAO.addTitle(t);

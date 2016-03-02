@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User addUser(User u) throws UserBadRequest {
-		if (u.getEmail() == null || u.getFirstName() == null) {
+		User user = userDAO.getUserByEmail(u.getEmail());
+		if (u.getEmail() == null || u.getFirstName() == null || u.getId()!= 0 || user !=null) {
 			throw new UserBadRequest();
 		}
 		return userDAO.addUser(u);
