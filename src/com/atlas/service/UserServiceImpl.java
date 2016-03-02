@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	@Qualifier("userDAOImpl")
 	private UserDAO userDAO;
-	
+
 	@Autowired
 	@Qualifier("commentsDAOImpl")
 	private CommentsDAO commentsDAO;
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User addUser(User u) throws UserBadRequest {
 		User user = userDAO.getUserByEmail(u.getEmail());
-		if (u.getEmail() == null || u.getFirstName() == null || u.getId()!= 0 || user !=null) {
+		if (u.getEmail() == null || u.getFirstName() == null || u.getId() != 0 || user != null) {
 			throw new UserBadRequest();
 		}
 		return userDAO.addUser(u);
@@ -64,12 +64,12 @@ public class UserServiceImpl implements UserService {
 		if (existing == null) {
 			throw new UserNotFound();
 		} else {
-			List<Comments> commentlist= commentsDAO.getCommentsForUser(id);
-			List<Rating> ratinglist= ratingDAO.getRatingByUser(id);
-			if(commentlist!=null){
+			List<Comments> commentlist = commentsDAO.getCommentsForUser(id);
+			List<Rating> ratinglist = ratingDAO.getRatingByUser(id);
+			if (commentlist != null) {
 				commentsDAO.removeCommentsForUser(id);
 			}
-			if(ratinglist!=null){
+			if (ratinglist != null) {
 				ratingDAO.removeRatingForUser(id);
 			}
 			return userDAO.removeUser(id);
@@ -92,13 +92,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String login(int id, String password) throws ServletException, UserNotFound {
-		 if(userDAO.login(id, password)){
-			 User user=getUserById(id);
-			 return new String(Jwts.builder().setSubject(user.getFirstName())
-			           .claim("roles", user.getLastName()).setIssuedAt(new Date())
-			           .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
-		 }
-		 throw new ServletException("Invalid login");
+	public String login(String email, String password) throws ServletException, UserNotFound {
+		if (userDAO.login(email, password)) {
+			User user = getUserByEmail(email);
+			return new String(Jwts.builder().setSubject(user.getFirstName()).claim("roles", user.getLastName())
+					.setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, "secretkey").compact());
+		}
+		throw new ServletException("Invalid login");
 	}
+
+	@Override
+	public User getUserByEmail(String email) throws UserNotFound {
+		User existing = userDAO.getUserByEmail(email);
+		if (existing == null) {
+			throw new UserNotFound();
+		} else {
+			return existing;
+		}
+	}
+
 }

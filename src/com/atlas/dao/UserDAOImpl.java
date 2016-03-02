@@ -64,9 +64,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean login(int id, String password) {
-		Session session = sessionFactory.getCurrentSession();
-		User user = (User) session.load(User.class, new Integer(id));
+	public boolean login(String email, String password) {
+		User user = getUserByEmail(email);
 		if (null != user) {
 			if (BCrypt.checkpw(password, user.getPassword()))
 				return true;
@@ -84,6 +83,8 @@ public class UserDAOImpl implements UserDAO {
 		List<User> user = query.setParameter("searchTerm",email).list();
 		return user.get(0);
 	}
+
+
 
 
 }

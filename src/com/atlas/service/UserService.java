@@ -22,6 +22,8 @@ public interface UserService {
 
 	public User getUserById(int id) throws UserNotFound;
 	
-	public String login(int id, String password) throws ServletException, UserNotFound;
+	public String login(String email, String password) throws ServletException, UserNotFound;
+	
+	public User getUserByEmail(String email) throws UserNotFound; 
 	
 }

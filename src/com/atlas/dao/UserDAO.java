@@ -19,8 +19,8 @@ public interface UserDAO {
 	
 	public User getUserById(int id);
 	
-	public boolean login(int id, String password);
-	
 	public User getUserByEmail(String email);
+
+	public boolean login(String email, String password);
 	
 }
