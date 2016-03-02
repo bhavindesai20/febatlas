@@ -11,12 +11,17 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Component
 @Entity
 @Table(name="Title")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Title {
 	
 	@Id
@@ -45,8 +50,8 @@ public class Title {
 	@Column(name="director")
 	private String director;
 	
-	@Column(name="actor")
-	private String actor;
+	@Column(name="actors")
+	private String actors;
 	
 	@Column(name="writer")
 	private String writer;
@@ -60,8 +65,8 @@ public class Title {
 	@Column(name="country")
 	private String country;
 	
-	@Column(name="award")
-	private String award;
+	@Column(name="awards")
+	private String awards;
 	
 	@Column(name="poster")
 	private String poster;
@@ -78,9 +83,12 @@ public class Title {
 	@Column(name="imdbid")
 	private String imdbId;
 	
-	@Column(name="titletype")
-	private String titleType;
-	 
+	@Column(name="type")
+	private String type;
+	
+	public Title(){
+		
+	}
 	
 	public int getYear() {
 		return year;
@@ -147,12 +155,14 @@ public class Title {
 		this.director = director;
 	}
 
-	public String getActor() {
-		return actor;
+	
+
+	public String getActors() {
+		return actors;
 	}
 
-	public void setActor(String actor) {
-		this.actor = actor;
+	public void setActors(String actors) {
+		this.actors = actors;
 	}
 
 	public String getWriter() {
@@ -187,12 +197,13 @@ public class Title {
 		this.country = country;
 	}
 
-	public String getAward() {
-		return award;
+
+	public String getAwards() {
+		return awards;
 	}
 
-	public void setAward(String award) {
-		this.award = award;
+	public void setAwards(String awards) {
+		this.awards = awards;
 	}
 
 	public String getPoster() {
@@ -235,12 +246,14 @@ public class Title {
 		this.imdbId = imdbId;
 	}
 
-	public String getTitleType() {
-		return titleType;
+	public String getType() {
+		return type;
 	}
 
-	public void setTitleType(String titleType) {
-		this.titleType = titleType;
+	public void setType(String type) {
+		this.type = type;
 	}
+
+	
 
 }

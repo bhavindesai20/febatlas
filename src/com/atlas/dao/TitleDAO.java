@@ -9,16 +9,22 @@ import com.atlas.entity.Title;
 @Repository
 public interface TitleDAO {
 	
-	public void addTitle(Title t);
+	public Title addTitle(Title t);
 
-	public void updateTitle(Title t);
+	public Title updateTitle(Title t);
 
-	public void removeTitle(int id);
+	public Title removeTitle(int id);
 	
 	public List<Title> listTitles();
 	
 	public Title getTitleById(int id);
 	
 	public List<Title> getTitleBySearchTerm(String title);
+	
+	public List<Title> getTitleByYear(int year);
+	
+	public List<Title> getTitleByType(String type);
+	
+	public List<Title> getTitleByGenre(String genre);
 	
 }
