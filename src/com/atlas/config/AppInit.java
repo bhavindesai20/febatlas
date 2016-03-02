@@ -9,7 +9,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[]{AppConfig.class};
+		return new Class[]{AppConfig.class,SwaggerConfig.class,AuthenticationFilter.class};
 	}
 
 	@Override
@@ -26,8 +26,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	
 	@Override
     protected Filter[] getServletFilters() {
-        Filter [] singleton = { new CORSFilter() };
+        Filter [] singleton = { new CORSFilter(), new AuthenticationFilter() };
         return singleton;
     }
-
 }
