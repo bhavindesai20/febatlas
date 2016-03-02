@@ -2,6 +2,7 @@ package com.atlas.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.mindrot.jbcrypt.BCrypt;
@@ -73,6 +74,15 @@ public class UserDAOImpl implements UserDAO {
 				return false;
 		}
 		return false;
+	}
+	
+	@Override
+	public User getUserByEmail(String email) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from User u where str(u.eamil) = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<User> user = query.setParameter("searchTerm",email).list();
+		return user.get(0);
 	}
 
 
