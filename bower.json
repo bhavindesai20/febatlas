@@ -1,0 +1,32 @@
+{
+  "name": "febatlas",
+  "description": "A netflix like movie service.",
+  "main": "index.js",
+  "authors": [
+    "FEBATLAS"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bhavindesai20/febatlas",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6"
+  },
+  "overrides":{
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+        }
+    }
+}

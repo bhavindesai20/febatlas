@@ -1,0 +1,25 @@
+{
+  "name": "febatlas",
+  "version": "0.0.0",
+  "description": "A netflix like movie service.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhavindesai20/febatlas"
+  },
+  "author": "FEBATLAS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhavindesai20/febatlas/issues"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-inject": "^3.0.0",
+    "main-bower-files": "^2.11.1"
+  }
+}
