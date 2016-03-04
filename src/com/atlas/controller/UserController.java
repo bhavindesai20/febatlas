@@ -56,13 +56,13 @@ public class UserController {
 		return this.userService.getUserById(id);
 	}
 	
-	@RequestMapping(value = "{email}", method = RequestMethod.GET, 
+	@RequestMapping(value = "/email/{email}/", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public User getUserByEmail(@PathVariable("email") String email) throws UserNotFound {
 		return this.userService.getUserByEmail(email);
 	}
 	
-	@RequestMapping(value="/email/{password}", method = RequestMethod.GET, 
+	@RequestMapping(value="/login/{password}", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public String login(@RequestParam(required=true,value="email") String email,
 			@PathVariable("password") String password) throws ServletException, UserNotFound{

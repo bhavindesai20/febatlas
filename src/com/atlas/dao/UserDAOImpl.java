@@ -76,9 +76,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	@Transactional
 	public User getUserByEmail(String email) {
 		Query query = sessionFactory.getCurrentSession().createQuery(
-				"from User u where str(u.eamil) = :searchTerm");
+				"from User u where str(u.email) = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<User> user = query.setParameter("searchTerm",email).list();
 		return user.get(0);
