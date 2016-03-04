@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,8 @@ public class UserServiceImpl implements UserService {
 		if (u.getEmail() == null || u.getFirstName() == null || u.getId() != 0 || user != null) {
 			throw new UserBadRequest();
 		}
+		String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+		u.setPassword(hashed);
 		return userDAO.addUser(u);
 	}
 
