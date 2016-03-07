@@ -82,7 +82,10 @@ public class UserDAOImpl implements UserDAO {
 				"from User u where str(u.email) = :searchTerm");
 		@SuppressWarnings("unchecked")
 		List<User> user = query.setParameter("searchTerm",email).list();
-		return user.get(0);
+		if(user.size()!= 0){
+		  return user.get(0);
+		}
+		return null;
 	}
 
 
