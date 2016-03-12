@@ -20,4 +20,6 @@ public interface RatingDAO {
 	public void removeRatingForUser(int userId);
 
 	public void removeRatingForTitle(int titleId);
+	
+	public List<Object> getTopRatedTitle();
 }

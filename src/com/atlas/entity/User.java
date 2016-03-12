@@ -10,7 +10,9 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Component
@@ -33,7 +35,8 @@ public class User {
 
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
-
+	
+	@JsonIgnore
 	@Column(name = "password", nullable = false)
 	private String password;
 
@@ -72,10 +75,12 @@ public class User {
 		this.email = email;
 	}
 	
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-
+	
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

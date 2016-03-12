@@ -26,7 +26,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	
 	@Override
     protected Filter[] getServletFilters() {
-        Filter [] singleton = { new CORSFilter(), new AuthenticationFilter() };
+        Filter [] singleton = { new CORSFilter() };
         return singleton;
     }
 }

@@ -19,4 +19,6 @@ public interface RatingService {
 	public List<Rating> getRatingByTitle(int titleId)throws MovieNotFound;
 
 	public Double getAverageRatingForTitle(int titleId) throws MovieNotFound;
+	
+	public List<Object> getTopRatedTitle();
 }

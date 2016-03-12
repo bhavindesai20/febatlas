@@ -49,5 +49,10 @@ public class RatingController {
 			throws MovieNotFound {
 		return this.ratingServiceImpl.getAverageRatingForTitle(titleId);
 	}
+	
+	@RequestMapping(value = "/toppicks", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Object> getTopRatedTitle(){
+		return this.ratingServiceImpl.getTopRatedTitle();
+	}
 
 }

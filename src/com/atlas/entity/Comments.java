@@ -37,7 +37,7 @@ public class Comments {
 	@JoinColumn(name = "title_Id", nullable = false)
 	private Title title;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_Id", nullable = false)
 	private User user;
 

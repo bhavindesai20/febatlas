@@ -83,4 +83,9 @@ public class RatingServiceImpl implements RatingService {
 		}
 	}
 
+	@Override
+	public List<Object> getTopRatedTitle() {
+		return ratingDAO.getTopRatedTitle();
+	}
+
 }

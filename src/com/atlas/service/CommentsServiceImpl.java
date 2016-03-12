@@ -1,5 +1,6 @@
 package com.atlas.service;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,14 @@ public class CommentsServiceImpl implements CommentsService {
 		if(t == null){
 			throw new MovieNotFound();
 		}
-		return commentsDAO.getCommentsForTitle(titleId);
+		List<Comments> commentsList = commentsDAO.getCommentsForTitle(titleId);
+		Iterator<Comments> cm= commentsList.iterator();
+		while(cm.hasNext()){
+			Comments c = (Comments)cm.next();
+			User u = userDAO.getUserById(c.getUser().getId());
+			c.setUser(u);
+		}
+		return commentsList;
 	}
 
 	@Override
@@ -99,7 +107,14 @@ public class CommentsServiceImpl implements CommentsService {
 		if (userId == 0) {
 			throw new UserUnAuthorized();
 		}
-		return commentsDAO.getCommentsForUser(userId);
+		List<Comments> commentsList = commentsDAO.getCommentsForUser(userId);
+		Iterator<Comments> cm= commentsList.iterator();
+		while(cm.hasNext()){
+			Comments c = (Comments)cm.next();
+			User u = userDAO.getUserById(c.getUser().getId());
+			c.setUser(u);
+		}
+		return commentsList;
 	}
 
 }

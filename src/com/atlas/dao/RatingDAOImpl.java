@@ -59,6 +59,15 @@ public class RatingDAOImpl implements RatingDAO {
 	
 	@Override
 	@Transactional
+	public List<Object> getTopRatedTitle() {
+		Query query = sessionFactory.getCurrentSession().createQuery("select avg(r.rating), r.title.id from Rating r group by title");
+		@SuppressWarnings("rawtypes")
+		List avgRatinglist = query.list();
+		return avgRatinglist;
+	}
+	
+	@Override
+	@Transactional
 	public void removeRatingForUser(int userId) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where user_Id = :searchTerm");
