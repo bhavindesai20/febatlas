@@ -88,4 +88,17 @@ public class RatingServiceImpl implements RatingService {
 		return ratingDAO.getTopRatedTitle();
 	}
 
+	@Override
+	public Rating getRatingByUserForTitle(int userId, int titleId) throws UserNotFound, MovieNotFound {
+		Title t = titleDAO.getTitleById(titleId);
+		User u = userDAO.getUserById(userId);
+		if(t == null){
+			throw new MovieNotFound();
+		}
+		if(u == null){
+			throw new UserNotFound();
+		}
+		return ratingDAO.getRatingByUserForTitle(userId,titleId);
+	}
+
 }

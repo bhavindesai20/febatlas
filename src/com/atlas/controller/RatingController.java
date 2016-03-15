@@ -53,5 +53,11 @@ public class RatingController {
 	public List<Object> getTopRatedTitle(){
 		return this.ratingServiceImpl.getTopRatedTitle();
 	}
+	
+	@RequestMapping(value = "/rating/{titleId}/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Rating getRatingForTitleByUser(@PathVariable("titleId") int titleId,
+			@PathVariable("userId") int userId) throws UserNotFound, MovieNotFound {
+		return this.ratingServiceImpl.getRatingByUserForTitle(userId, titleId);
+	}
 
 }

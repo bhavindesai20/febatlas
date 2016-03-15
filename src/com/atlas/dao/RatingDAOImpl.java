@@ -96,5 +96,17 @@ public class RatingDAOImpl implements RatingDAO {
 		}
 	}
 
+	@Override
+	@Transactional
+	public Rating getRatingByUserForTitle(int userId, int titleId) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from Rating where user_Id = :user AND title_Id = :title");
+		@SuppressWarnings("unchecked")
+		List<Rating> ratingsListByUser = query.setParameter("user",userId).setParameter("title", titleId).list();
+		if(ratingsListByUser.size()!= 0){
+			  return ratingsListByUser.get(0);
+		}
+		return null;
+	}
+
 
 }

@@ -22,4 +22,6 @@ public interface RatingDAO {
 	public void removeRatingForTitle(int titleId);
 	
 	public List<Object> getTopRatedTitle();
+	
+	public Rating getRatingByUserForTitle(int userId,int titleId);
 }
