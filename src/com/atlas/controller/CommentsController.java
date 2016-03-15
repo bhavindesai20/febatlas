@@ -19,7 +19,7 @@ import com.atlas.exception.UserUnAuthorized;
 import com.atlas.service.CommentsService;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 public class CommentsController {
 
 	@Autowired

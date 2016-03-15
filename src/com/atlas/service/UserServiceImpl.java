@@ -1,9 +1,6 @@
 package com.atlas.service;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.ServletException;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +15,7 @@ import com.atlas.entity.Rating;
 import com.atlas.entity.User;
 import com.atlas.exception.UserBadRequest;
 import com.atlas.exception.UserNotFound;
-
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.atlas.exception.UserUnAuthorized;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,6 +52,8 @@ public class UserServiceImpl implements UserService {
 		if (existing == null) {
 			throw new UserNotFound();
 		} else {
+			String hashed = BCrypt.hashpw(u.getPassword(), BCrypt.gensalt());
+			u.setPassword(hashed);
 			return userDAO.updateUser(u);
 		}
 	}
@@ -95,13 +92,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String login(String email, String password) throws ServletException, UserNotFound {
-		if (userDAO.login(email, password)) {
-			User user = getUserByEmail(email);
-			return new String(Jwts.builder().setSubject(user.getFirstName()).claim("roles", user.getLastName())
-					.setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, "secretkey").compact());
-		}
-		throw new ServletException("Invalid login");
+	public User login(String email, String password) throws UserUnAuthorized {
+			User validUser = userDAO.login(email, password);
+			if (validUser == null) {
+	            throw new UserUnAuthorized();
+	        }
+			return validUser;
 	}
 
 	@Override

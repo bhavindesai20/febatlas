@@ -1,26 +1,29 @@
 package com.atlas.controller;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
+import java.util.Date;
 import java.util.List;
-
-import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atlas.entity.User;
+import com.atlas.entity.UserLogin;
 import com.atlas.exception.UserBadRequest;
 import com.atlas.exception.UserNotFound;
+import com.atlas.exception.UserUnAuthorized;
 import com.atlas.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+	
 	@Autowired
 	private UserService userService;
 
@@ -62,11 +65,27 @@ public class UserController {
 		return this.userService.getUserByEmail(email);
 	}
 	
-	@RequestMapping(value="/login/{password}", method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public String login(@RequestParam(required=true,value="email") String email,
-			@PathVariable("password") String password) throws ServletException, UserNotFound{
-		return this.userService.login(email, password);
-		}
-
+	@RequestMapping(value = "login", method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE, 
+			consumes = MediaType.APPLICATION_JSON_VALUE)
+    public LoginResponse userlogin(@RequestBody final UserLogin login)
+        throws UserUnAuthorized {
+    	User u = userService.login(login.getEmail(),login.getPassword());
+        if (u == null) {
+            throw new UserUnAuthorized();
+        }
+        return new LoginResponse(Jwts.builder().setSubject(login.getEmail())
+            .claim("roles", "user").setIssuedAt(new Date())
+            .signWith(SignatureAlgorithm.HS256, "febatlas").compact());
+    }
+	
+	@SuppressWarnings("unused")
+    private static class LoginResponse {
+        public String token;
+        public LoginResponse(final String token) {
+            this.token = token;
+        }
+    }
+    
+	
 }

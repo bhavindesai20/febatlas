@@ -19,7 +19,7 @@ import com.atlas.service.TitleService;
 
 
 @RestController
-@RequestMapping("/titles")
+@RequestMapping("/api/titles")
 public class TitleController {
 
 	@Autowired

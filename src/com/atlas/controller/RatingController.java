@@ -18,7 +18,7 @@ import com.atlas.exception.UserUnAuthorized;
 import com.atlas.service.RatingService;
 
 @RestController
-@RequestMapping("/rating")
+@RequestMapping("/api/rating")
 public class RatingController {
 
 	@Autowired

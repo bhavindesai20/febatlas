@@ -64,15 +64,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean login(String email, String password) {
+	@Transactional
+	public User login(String email, String password) {
 		User user = getUserByEmail(email);
-		if (null != user) {
-			if (BCrypt.checkpw(password, user.getPassword()))
-				return true;
-			else
-				return false;
+		if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+			return user;
 		}
-		return false;
+		return null;
 	}
 	
 	@Override

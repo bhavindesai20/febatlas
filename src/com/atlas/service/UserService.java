@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.atlas.entity.User;
 import com.atlas.exception.UserBadRequest;
 import com.atlas.exception.UserNotFound;
+import com.atlas.exception.UserUnAuthorized;
 
 @Service
 public interface UserService {
@@ -22,7 +23,7 @@ public interface UserService {
 
 	public User getUserById(int id) throws UserNotFound;
 	
-	public String login(String email, String password) throws ServletException, UserNotFound;
+	public User login(String email, String password) throws UserUnAuthorized;
 	
 	public User getUserByEmail(String email) throws UserNotFound; 
 	

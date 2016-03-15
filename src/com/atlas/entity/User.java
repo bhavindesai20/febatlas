@@ -36,7 +36,6 @@ public class User {
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@JsonIgnore
 	@Column(name = "password", nullable = false)
 	private String password;
 
@@ -75,12 +74,10 @@ public class User {
 		this.email = email;
 	}
 	
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 	
-	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
