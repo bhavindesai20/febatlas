@@ -21,51 +21,50 @@ import com.atlas.exception.UserUnAuthorized;
 import com.atlas.service.UserService;
 
 @RestController
-@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(method = RequestMethod.POST, 
+	@RequestMapping(value="/users",method = RequestMethod.POST, 
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User addUser(@RequestBody User u) throws UserBadRequest {
 		return this.userService.addUser(u);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, 
+	@RequestMapping(value="/api/users",method = RequestMethod.PUT, 
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public User updateUser(@RequestBody User u) throws UserNotFound {
 		return this.userService.updateUser(u);
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE, 
+	@RequestMapping(value = "/api/users/{id}", method = RequestMethod.DELETE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public User removeUser(@PathVariable("id") int id) throws UserNotFound {
 		return this.userService.removeUser(id);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, 
+	@RequestMapping(value = "/api/users",method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<User> listUser() {
 		return this.userService.listUser();
 	}
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET, 
+	@RequestMapping(value = "/api/users/{id}", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public User getUserById(@PathVariable("id") int id) throws UserNotFound {
 		return this.userService.getUserById(id);
 	}
 	
-	@RequestMapping(value = "/email/{email}/", method = RequestMethod.GET, 
+	@RequestMapping(value = "/api/users/email/{email}/", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public User getUserByEmail(@PathVariable("email") String email) throws UserNotFound {
 		return this.userService.getUserByEmail(email);
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST,
+	@RequestMapping(value = "/users/login", method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE, 
 			consumes = MediaType.APPLICATION_JSON_VALUE)
     public LoginResponse userlogin(@RequestBody final UserLogin login)
