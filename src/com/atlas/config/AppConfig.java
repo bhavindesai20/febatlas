@@ -34,8 +34,8 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/moviedb");
-		dataSource.setUsername("bdesai1");
-		dataSource.setPassword("admin");
+		dataSource.setUsername("root");
+		dataSource.setPassword("sursum24");
 		return dataSource;
 	}
 
@@ -55,6 +55,8 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.dialect",
 				"org.hibernate.dialect.MySQLDialect");
+		properties.put("hibernate.format_sql", "true");
+		properties.put("hibernate.enable_lazy_load_no_trans", "true");
 		return properties;
 	}
 

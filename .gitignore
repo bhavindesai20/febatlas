@@ -2,6 +2,7 @@
 *.classpath
 *.project
 
+
 # Package Files #
 *.jar
 *.war
@@ -11,4 +12,6 @@
 /target/
 /.settings/
 /build/
-
+/.idea/
+/bower_components/
+/node_modules/

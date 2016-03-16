@@ -1,6 +1,5 @@
 package com.atlas.config;
 
-import javax.servlet.Filter;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -9,7 +8,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return new Class[]{AppConfig.class,SwaggerConfig.class};
+		return new Class[]{AppConfig.class,SwaggerConfig.class,AuthenticationFilter.class};
 	}
 
 	@Override
@@ -21,13 +20,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
 	@Override
 	protected String[] getServletMappings() {
 		// TODO Auto-generated method stub
-		return new String[] {"/api/*"};
+		return new String[] {"/*"};
 	}
 	
-	@Override
-    protected Filter[] getServletFilters() {
-        Filter [] singleton = { new CORSFilter() };
-        return singleton;
-    }
-
 }

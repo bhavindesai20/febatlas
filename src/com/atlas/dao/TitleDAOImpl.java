@@ -2,6 +2,7 @@ package com.atlas.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,52 +12,98 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlas.entity.Title;
 
 @Repository
-public class TitleDAOImpl implements TitleDAO{
-	
+public class TitleDAOImpl implements TitleDAO {
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public TitleDAOImpl() {
 	}
-	
+
 	@Override
 	@Transactional
-	public void addTitle(Title t) {
+	public Title addTitle(Title t) {
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(t);
+		return t;
 	}
-	
+
+	@Override
+	@Transactional
+	public Title updateTitle(Title t) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(t);
+		return t;
+	}
+
+	@Override
+	@Transactional
+	public Title removeTitle(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Title title = (Title) session.get(Title.class, new Integer(id));
+		session.delete(title);
+		return title;
+	}
+
 	@Override
 	@Transactional
 	public List<Title> listTitles() {
 		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		List<Title> titleList = session.createQuery("from Title").list();
 		return titleList;
 	}
 
 	@Override
-	public void updateTitle(Title t) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeTitle(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
+	@Transactional
 	public Title getTitleById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		Title title = (Title) session.get(Title.class, new Integer(id));
+		return title;
 	}
 
 	@Override
+	@Transactional
 	public List<Title> getTitleBySearchTerm(String title) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.title) like :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Title> titleListByTitle = query.setParameter("searchTerm",
+				"%" + title + "%").list();
+		return titleListByTitle;
 	}
 
+	@Override
+	@Transactional
+	public List<Title> getTitleByYear(int year) {
+		String hql = "from Title where year=" + year;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Title> listTitle = (List<Title>) query.list();
+		return listTitle;
+	}
+
+	@Override
+	@Transactional
+	public List<Title> getTitleByType(String type) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.type) = :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Title> titleListByType = query.setParameter("searchTerm", type)
+				.list();
+		return titleListByType;
+	}
+
+	@Override
+	@Transactional
+	public List<Title> getTitleByGenre(String genre) {
+		Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Title t where str(t.genre) like :searchTerm");
+		@SuppressWarnings("unchecked")
+		List<Title> titleListByGenre = query.setParameter("searchTerm",
+				"%" + genre + "%").list();
+		return titleListByGenre;
+	}
 }
