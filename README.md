@@ -1,7 +1,12 @@
 # febatlas
+Team Member:
+Bhavin Desai bhavindesai20@gmail.com
 
-Bhavin Desai
+Surya Mylar surya.mylar@gmail.com
 
-Surya Mylar
+Shashank Timmarajus shashanksry@gmail.com
 
-Shashank Timmarajus
+UI part is in https://github.com/bhavindesai20/atlasUI
+
+
+
