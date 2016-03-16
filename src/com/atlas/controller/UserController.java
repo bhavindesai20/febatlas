@@ -75,7 +75,7 @@ public class UserController {
         }
         return new LoginResponse(Jwts.builder().setSubject(login.getEmail())
             .claim("roles", "user").setIssuedAt(new Date())
-            .signWith(SignatureAlgorithm.HS256, "febatlas").compact());
+            .signWith(SignatureAlgorithm.HS256, "secretkey").compact());
     }
 	
 	@SuppressWarnings("unused")
