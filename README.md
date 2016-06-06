@@ -6,11 +6,11 @@ This is Spring MVC and Hibernate based REST API.
 
 https://github.com/bhavindesai20/atlasUI
 
-# Technology Stack For Building this project,
+# Technology Stack For Building this project:
 
 JAVA, SPRING MVC 4, Hibernate, REST, Filters, JWT Authentication, MySQL, Collection Framework, POJO Based Designing, Swagger API Testing Tool, Custom Exception Handling etc.
 
-# THis API Provide Functionality like:
+# Functionalities:
 
 1.	User can register and login with session management functionality
 2.	Admin can manage all the titles on database and manage it from UI
